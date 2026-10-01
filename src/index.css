@@ -1,0 +1,171 @@
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+
+  html,
+  body,
+  #root {
+    min-height: 100%;
+  }
+
+  body {
+    background-color: transparent;
+    /* Laisse passer le GlobalVortex */
+    color: #0f0f0f;
+    font-family: "Bricolage Grotesque", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+}
+
+@layer components {
+
+  /* Cartes */
+  .card-hard {
+    @apply bg-white border-[3px] border-ink rounded-2xl shadow-hard;
+  }
+
+  /* Bouton CTA Principal */
+  .btn-hard {
+    @apply inline-flex items-center justify-center gap-2 bg-ink text-white font-black px-8 py-4 rounded-full border-[3px] border-ink hover:bg-white hover:text-ink transition-colors active:translate-x-[2px] active:translate-y-[2px] active:shadow-none shadow-hard-sm disabled:opacity-50 disabled:pointer-events-none;
+  }
+
+  /* Labels */
+  .label-hard {
+    @apply inline-block bg-ink text-white text-xs font-black uppercase tracking-widest px-4 py-2 rounded-full;
+  }
+
+  /* --- STYLES DE SURLIGNAGE (Façon Sticker / Surligneur) --- */
+  .text-mark {
+    @apply inline bg-sun border-2 border-ink px-1.5 py-0.5 rounded-md font-black text-ink;
+  }
+
+  .text-mark-mint {
+    @apply inline bg-mint border-2 border-ink px-1.5 py-0.5 rounded-md font-black text-ink;
+  }
+
+  .text-mark-blush {
+    @apply inline bg-blush border-2 border-ink px-1.5 py-0.5 rounded-md font-black text-ink;
+  }
+
+  /* --- COULEURS DE TEXTES PURES (Pour les titres forts) --- */
+  .text-green-strong {
+    @apply font-black text-[#00cc66];
+  }
+
+  .text-red-strong {
+    @apply font-black text-[#ff3366];
+  }
+}
+
+/* ==========================================
+   Animations Custom (Keyframes)
+   ========================================== */
+
+/* Bouton Jello (au hover) */
+@keyframes jello-vertical {
+  0% {
+    transform: scale3d(1, 1, 1);
+  }
+
+  30% {
+    transform: scale3d(0.75, 1.25, 1);
+  }
+
+  40% {
+    transform: scale3d(1.25, 0.75, 1);
+  }
+
+  50% {
+    transform: scale3d(0.85, 1.15, 1);
+  }
+
+  65% {
+    transform: scale3d(1.05, 0.95, 1);
+  }
+
+  75% {
+    transform: scale3d(0.95, 1.05, 1);
+  }
+
+  100% {
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+/* Défilement Stats */
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Apparition (Toast / Stepper) */
+@keyframes toastIn {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -16px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+/* Machine à écrire */
+@keyframes blink-caret {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+}
+
+
+/* ==========================================
+   Classes Utilitaires
+   ========================================== */
+
+@layer utilities {
+
+  /* Masquer barre scroll du Carrousel */
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  /* Appel des animations */
+  .animate-jello {
+    animation: jello-vertical 0.9s both;
+    transform-origin: left;
+  }
+
+  .animate-marquee {
+    animation: marquee 35s linear infinite;
+  }
+
+  .animate-marquee:hover {
+    animation-play-state: paused;
+  }
+
+  .caret-blink {
+    animation: blink-caret 0.9s step-end infinite;
+  }
+}
