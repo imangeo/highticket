@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -13,8 +13,8 @@
   }
 
   body {
+    /* Transparent pour laisser passer le fond animé GridScan */
     background-color: transparent;
-    /* Laisse passer le GlobalVortex */
     color: #0f0f0f;
     font-family: "Bricolage Grotesque", system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -24,49 +24,53 @@
 
 @layer components {
 
-  /* Cartes */
+  /* Cartes Blanches Opaques */
   .card-hard {
-    @apply bg-white border-[3px] border-ink rounded-2xl shadow-hard;
+    @apply bg-white text-ink border-[3px] border-ink rounded-2xl shadow-hard;
   }
 
-  /* Bouton CTA Principal */
+  /* Cartes Sombres Profondes */
+  .card-dark {
+    @apply bg-black/90 text-white border-2 border-white/20 rounded-2xl backdrop-blur-md shadow-xl;
+  }
+
+  /* Boutons */
   .btn-hard {
     @apply inline-flex items-center justify-center gap-2 bg-ink text-white font-black px-8 py-4 rounded-full border-[3px] border-ink hover:bg-white hover:text-ink transition-colors active:translate-x-[2px] active:translate-y-[2px] active:shadow-none shadow-hard-sm disabled:opacity-50 disabled:pointer-events-none;
   }
 
-  /* Labels */
+  /* Badges */
   .label-hard {
     @apply inline-block bg-ink text-white text-xs font-black uppercase tracking-widest px-4 py-2 rounded-full;
   }
 
-  /* --- STYLES DE SURLIGNAGE (Façon Sticker / Surligneur) --- */
+  /* Surlignages style Sticker Neo-Brutaliste */
   .text-mark {
     @apply inline bg-sun border-2 border-ink px-1.5 py-0.5 rounded-md font-black text-ink;
   }
 
   .text-mark-mint {
-    @apply inline bg-mint border-2 border-ink px-1.5 py-0.5 rounded-md font-black text-ink;
+    @apply inline bg-[#62C58F] border-2 border-ink px-1.5 py-0.5 rounded-md font-black text-ink;
   }
 
   .text-mark-blush {
     @apply inline bg-blush border-2 border-ink px-1.5 py-0.5 rounded-md font-black text-ink;
   }
 
-  /* --- COULEURS DE TEXTES PURES (Pour les titres forts) --- */
+  /* Couleurs de texte seules */
   .text-green-strong {
-    @apply font-black text-[#00cc66];
+    @apply font-black text-[#1D5B3E];
   }
 
   .text-red-strong {
-    @apply font-black text-[#ff3366];
+    @apply font-black text-red-600;
   }
 }
 
 /* ==========================================
-   Animations Custom (Keyframes)
+   Keyframe Animations
    ========================================== */
 
-/* Bouton Jello (au hover) */
 @keyframes jello-vertical {
   0% {
     transform: scale3d(1, 1, 1);
@@ -97,7 +101,6 @@
   }
 }
 
-/* Défilement Stats */
 @keyframes marquee {
   0% {
     transform: translateX(0);
@@ -108,7 +111,6 @@
   }
 }
 
-/* Apparition (Toast / Stepper) */
 @keyframes toastIn {
   0% {
     opacity: 0;
@@ -121,7 +123,6 @@
   }
 }
 
-/* Machine à écrire */
 @keyframes blink-caret {
 
   0%,
@@ -134,14 +135,11 @@
   }
 }
 
-
 /* ==========================================
    Classes Utilitaires
    ========================================== */
 
 @layer utilities {
-
-  /* Masquer barre scroll du Carrousel */
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
   }
@@ -151,7 +149,6 @@
     scrollbar-width: none;
   }
 
-  /* Appel des animations */
   .animate-jello {
     animation: jello-vertical 0.9s both;
     transform-origin: left;

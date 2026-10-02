@@ -3,20 +3,20 @@ import { GridScan } from "./GridScan";
 
 export default function GlobalGridScan() {
   return (
-    <div className="fixed inset-0 w-full h-full -z-10 bg-cream overflow-hidden pointer-events-none">
+    <div className="fixed inset-0 w-full h-full -z-10 bg-[#050505] overflow-hidden pointer-events-none">
       <GridScan
-        lineThickness={2.0}
+        lineThickness={1.5}
         gridScale={0.12}
-        linesColor="#0f0f0f"
-        scanColor="#1D5B3E"
+        linesColor="#1e293b" /* Lignes de grille sombres et fines */
+        scanColor="#00ff88" /* Laser Vert Néon très lumineux */
         scanOpacity={0.9}
         scanDuration={2.2}
         scanGlow={0.8}
         className="w-full h-full"
         style={{ width: "100%", height: "100%" }}
       />
-      {/* Léger voile crème à 15% pour laisser briller le scan */}
-      <div className="absolute inset-0 bg-cream/15 pointer-events-none" />
+      {/* Légère vignette pour concentrer l'œil au centre */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/60 pointer-events-none" />
     </div>
   );
 }
