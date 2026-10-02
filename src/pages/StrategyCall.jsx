@@ -169,7 +169,7 @@ export default function StrategyCall() {
           </div>
           <div className="flex flex-col gap-2 text-left">
             <label className="text-xs font-black uppercase tracking-widest text-black/70">
-              Numéro WhatsApp <span className="text-red-500">*</span>
+              Numéro WhatsApp Uniquement <span className="text-red-500">*</span>
             </label>
             <div className="flex gap-2">
               <div className="flex items-center px-3 py-3 bg-black text-white font-black rounded-xl border-2 border-black text-sm shrink-0">
