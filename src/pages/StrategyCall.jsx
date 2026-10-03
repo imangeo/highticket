@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { SITE_CONFIG } from "../config/site.config";
+import { CONTENT } from "../config/content";
 import { sendLeadToGoogle } from "../services/googleApi";
 import CountryPicker, { ALL_COUNTRIES } from "../components/ui/CountryPicker";
 import {
@@ -11,10 +12,10 @@ import {
   formatPhoneAsYouType,
   enforceCountryMaxPhoneDigits,
 } from "../utils/sanitize";
-import { AlertTriangle, CheckCircle2, Loader2 } from "lucide-react";
+import { AlertTriangle, CheckCircle2 } from "lucide-react";
 import { fireConfetti } from "../utils/confetti";
 import WizardSteps from "../components/ui/WizardSteps";
-import Button from "../components/ui/Button";
+import SmartVideoPlayer from "../components/ui/SmartVideoPlayer";
 
 export default function StrategyCall() {
   const [index, setIndex] = useState(0);
@@ -29,7 +30,7 @@ export default function StrategyCall() {
     ALL_COUNTRIES.find((c) => c.code === "FR") || ALL_COUNTRIES[0],
   );
 
-  const [status, setStatus] = useState("idle");
+  const [status, setStatus] = useState("idle"); // idle | loading | success | error
   const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
@@ -103,7 +104,7 @@ export default function StrategyCall() {
   const stepsData = [
     {
       id: "identity",
-      label: "Identité", // Ce texte sera mis en blanc dans WizardSteps
+      label: "Identité",
       content: (
         <div className="space-y-4 pt-1">
           <div className="flex flex-col gap-2 text-left">
@@ -166,7 +167,6 @@ export default function StrategyCall() {
             <label className="text-xs font-bold uppercase tracking-widest text-white/80">
               Pays <span className="text-[#ff3366]">*</span>
             </label>
-            {/* Le CountryPicker doit aussi être lisible, assure-toi qu'il l'est */}
             <CountryPicker selected={country} onSelect={setCountry} />
           </div>
           <div className="flex flex-col gap-2 text-left">
@@ -182,7 +182,7 @@ export default function StrategyCall() {
                 value={displayPhone}
                 onChange={(e) => setPhone(e.target.value)}
                 inputMode="numeric"
-                placeholder="Numéro WhatsApp"
+                placeholder="Numéro local"
                 className={`flex-1 ${inputClass}`}
               />
             </div>
@@ -195,10 +195,30 @@ export default function StrategyCall() {
   return (
     <main className="w-full min-h-[80vh] bg-transparent text-white px-4 py-16 relative">
       <div className="max-w-md mx-auto text-center relative z-10">
+        {/* Titre Principal */}
         <h1 className="text-4xl sm:text-5xl font-black uppercase tracking-tight leading-tight mb-8 text-white drop-shadow-lg">
           {status === "success" ? "C'est enregistré !" : "Prêt à commencer"}
         </h1>
 
+        {/* Phrase + Vidéo Explicative */}
+        {status !== "success" && (
+          <div className="mb-10 max-w-2xl mx-auto animate-[toastIn_0.3s_ease-out]">
+            <p className="text-xl sm:text-2xl font-black uppercase tracking-tight text-white mb-6 drop-shadow-md">
+              Bravo de passer à l'action !
+            </p>
+
+            {/* Lecteur Vidéo (S'il n'y a pas de lien dans content.js, ça affiche le placeholder normal) */}
+            <div className="card-dark overflow-hidden border border-white/15 shadow-xl mx-auto">
+              <SmartVideoPlayer
+                src={CONTENT.videos.strategy?.src || ""}
+                type={CONTENT.videos.strategy?.type || "file"}
+                title={CONTENT.videos.strategy?.title || "Vidéo explicative"}
+              />
+            </div>
+          </div>
+        )}
+
+        {/* Erreurs de formulaire */}
         {errorMessage && (
           <div className="bg-red-500/20 border border-red-500/50 text-white rounded-xl p-3 mb-6 flex items-center gap-2 text-sm font-medium text-left shadow-lg">
             <AlertTriangle size={18} className="shrink-0 text-red-400" />
@@ -206,8 +226,9 @@ export default function StrategyCall() {
           </div>
         )}
 
+        {/* ===== ÉCRAN SUCCÈS ===== */}
         {status === "success" ? (
-          <div className="card-dark p-8 sm:p-10 text-center space-y-6">
+          <div className="card-dark p-8 sm:p-10 text-center space-y-6 animate-[toastIn_0.35s_ease-out]">
             <div className="w-16 h-16 mx-auto rounded-full bg-green-500/20 border border-green-500/50 flex items-center justify-center">
               <CheckCircle2
                 size={36}
@@ -224,8 +245,7 @@ export default function StrategyCall() {
                 </span>
                 , j'ai bien reçu tes informations.
               </p>
-
-              <p className="font-bold text-lg sm:text-xl text-white uppercase tracking-tight bg-white/10 border border-white/20 p-4 rounded-xl leading-snug">
+              <p className="font-bold text-lg sm:text-xl text-white uppercase tracking-tight bg-white/5 border border-white/10 p-4 rounded-xl leading-snug">
                 Je vous contacte dès que possible.
               </p>
             </div>
@@ -240,6 +260,7 @@ export default function StrategyCall() {
             </div>
           </div>
         ) : (
+          /* ===== FORMULAIRE STEPPER ===== */
           <div className="text-white">
             <WizardSteps
               steps={stepsData}
@@ -248,7 +269,7 @@ export default function StrategyCall() {
               onComplete={handleComplete}
               complete={done}
               isLoading={status === "loading"}
-              height={340} // Un peu plus haut pour respirer
+              height={340}
               nextLabel="Suivant"
               backLabel="Retour"
               finishLabel="Envoyer"
@@ -258,8 +279,9 @@ export default function StrategyCall() {
           </div>
         )}
 
+        {/* Mention de bas de page */}
         {status !== "success" && (
-          <p className="mt-8 text-[11px] font-medium uppercase tracking-widest text-white/70 bg-black/40 backdrop-blur-md inline-block px-4 py-2 rounded-full border border-white/10">
+          <p className="mt-8 text-[11px] font-medium uppercase tracking-widest text-white/50 bg-black/40 backdrop-blur-md inline-block px-4 py-2 rounded-full border border-white/10">
             Places limitées · Sans engagement
           </p>
         )}
