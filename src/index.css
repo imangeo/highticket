@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -13,9 +13,13 @@
   }
 
   body {
+    /* Transparent pour laisser passer le fond animé */
     background-color: transparent;
     color: #ffffff;
-    font-family: "Bricolage Grotesque", system-ui, sans-serif;
+
+    /* Police Montserrat pour tout le site */
+    font-family: "Montserrat", system-ui, sans-serif;
+
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
   }
@@ -25,15 +29,16 @@
 
   /* Cartes Blanches Opaques */
   .card-hard {
-    @apply bg-white text-[#0f0f0f] border-2 border-black rounded-2xl shadow-xl;
+    @apply bg-white text-[#0f0f0f] border-2 border-black rounded-2xl;
+    box-shadow: 4px 4px 0px 0px rgba(255, 255, 255, 0.2);
   }
 
-  /* Cartes Sombres Profondes */
+  /* Cartes Sombres Profondes (Verre Fumé) */
   .card-dark {
-    @apply bg-black/80 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl;
+    @apply bg-[#0a0a0a]/80 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl;
   }
 
-  /* ======== LE BOUTON SHINE (CSS Standard pour éviter les bugs @apply) ======== */
+  /* ======== LE BOUTON SHINE (Bleu) ======== */
   .btn-shine {
     position: relative;
     display: inline-flex;
@@ -102,6 +107,33 @@
 
   .btn-shine:hover::before {
     animation: btn-shine-sweep 1.5s ease-out infinite;
+  }
+
+  /* Badges */
+  .label-hard {
+    @apply inline-block bg-white text-[#0f0f0f] text-xs font-black uppercase tracking-widest px-4 py-2 rounded-full border-2 border-black;
+  }
+
+  /* Surlignages style Sticker Neo-Brutaliste */
+  .text-mark {
+    @apply inline bg-[#ffd731] px-2 py-0.5 rounded-md font-black text-black;
+  }
+
+  .text-mark-mint {
+    @apply inline bg-[#62C58F] px-2 py-0.5 rounded-md font-black text-black;
+  }
+
+  .text-mark-blush {
+    @apply inline bg-[#ff7800] px-2 py-0.5 rounded-md font-black text-white;
+  }
+
+  /* Couleurs de texte pures */
+  .text-green-strong {
+    @apply font-black text-[#62C58F];
+  }
+
+  .text-red-strong {
+    @apply font-black text-[#ff7800];
   }
 }
 
