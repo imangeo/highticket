@@ -554,24 +554,28 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      {/* ========== 6. OFFRES DU JOUR ========== */}
-      <section className="px-4 py-16 bg-[#050505]/40 border-y border-white/10">
+      {/* ========== 6. OFFRES DU JOUR (Grand Cadre + Format Vidéo Entier) ========== */}
+      <section className="px-4 py-16">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-3xl sm:text-5xl font-black uppercase tracking-tight leading-tight mb-6 text-white">
             JE T’ENVOIE DES OFFRES CHAQUE JOUR
           </h2>
-          <p className="font-medium text-white/80 text-lg max-w-2xl mx-auto mb-4">
+
+          <p className="font-medium text-white/80 text-base sm:text-lg max-w-2xl mx-auto mb-10 leading-relaxed">
             Tu n’auras pas besoin de chercher les opportunités seul. Chaque
             jour, je t’envoie des offres d’entrepreneurs à la recherche de
             setters.
-          </p>
-          <p className="font-medium text-white/80 text-lg max-w-2xl mx-auto mb-10">
+            <br />
+            <br />
             Ton seul travail sera alors de postuler aux offres qui
             t’intéressent.
+            <br />
+            <br />
+            <strong className="text-white text-xl">VOICI UN APERÇU :</strong>
           </p>
-          <p className="font-bold text-white text-lg mb-4">VOICI UN APERÇU :</p>
-          <div className="max-w-3xl mx-auto">
+
+          {/* GRAND CADRE LARGE QUI CONTIENT LA VIDÉO SANS LA COUPER */}
+          <div className="card-dark p-4 sm:p-8 max-w-3xl mx-auto">
             <SmartVideoPlayer
               src={CONTENT.videos.dailyOffer.src}
               type={CONTENT.videos.dailyOffer.type}
