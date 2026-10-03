@@ -174,6 +174,7 @@ export default function Home() {
               src={CONTENT.videos.hero.src}
               type={CONTENT.videos.hero.type}
               title={CONTENT.videos.hero.title}
+              priority={true}
             />
           </div>
 
