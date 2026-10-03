@@ -1,40 +1,27 @@
 export const CONTENT = {
-  // ========== 1. VIDÉOS PRINCIPALES ==========
   videos: {
-    hero: {
-      type: "file",
-      src: "/hero.mp4", // À ajouter plus tard dans public/
-      title: "Vidéo de présentation",
-    },
-    dailyOffer: {
-      type: "file",
-      src: "/offre.mp4", // À ajouter plus tard dans public/
-      title: "Exemple d'offre du jour",
-    },
-    strategy: {
-      type: "file",
-      src: "/strategie.mp4",
-      title: "Explication Stratégie",
-    },
+    hero: { type: "file", src: "/hero.mp4", title: "Vidéo de présentation" },
+    dailyOffer: { type: "file", src: "/offre.mp4", title: "Exemple d'offre du jour" },
+    strategy: { type: "file", src: "/strategie.mp4", title: "Explication Stratégie" },
   },
-
-  // ========== 2. TEXTES DES SECTIONS ==========
   dailyOfferSection: {
     badge: "L'écosystème",
     title: "Je t'envoie des offres chaque jour",
-    subtitle:
-      "Tu n’auras pas besoin de chercher les opportunités seul. Ton seul travail sera de postuler aux offres qui t’intéressent.",
+    subtitle: "Tu n’auras pas besoin de chercher les opportunités seul. Ton seul travail sera de postuler aux offres qui t’intéressent.",
   },
-
-  // ========== 3. PREUVES SOCIALES (Alignées avec ta capture) ==========
-  // ========== 3. PREUVES SOCIALES ==========
   proofs: [
+    // 1. Vidéos dans le bon ordre
     { id: "v1", type: "video-file", src: "/v1.mp4", title: "Témoignage 1" },
     { id: "v5", type: "video-file", src: "/v5.mp4", title: "Témoignage 5" },
     { id: "v2", type: "video-file", src: "/v2.mp4", title: "Témoignage 2" },
     { id: "v3", type: "video-file", src: "/v3.mp4", title: "Témoignage 3" },
     { id: "v4", type: "video-file", src: "/v4.mp4", title: "Témoignage 4" },
 
+    // 2. Images Prioritaires
+    { id: "r22", type: "image", src: "/r22.png" },
+    { id: "r20", type: "image", src: "/r20.png" },
+
+    // 3. Le reste des images
     { id: "r1", type: "image", src: "/r1.jpg" },
     { id: "r2", type: "image", src: "/r2.jpg" },
     { id: "r3", type: "image", src: "/r3.PNG" },
@@ -50,5 +37,11 @@ export const CONTENT = {
     { id: "r13", type: "image", src: "/r13.jpg" },
     { id: "r14", type: "image", src: "/r14.jpg" },
     { id: "r15", type: "image", src: "/r15.jpg" },
+    { id: "r16", type: "image", src: "/r16.png" },
+    { id: "r17", type: "image", src: "/r17.png" },
+    { id: "r18", type: "image", src: "/r18.png" },
+    { id: "r19", type: "image", src: "/r19.png" },
+    { id: "r21", type: "image", src: "/r21.png" },
+    { id: "r23", type: "image", src: "/r23.png" },
   ],
 };

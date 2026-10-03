@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
 
 export default function Button({
   children,
@@ -10,26 +9,42 @@ export default function Button({
   className = "",
   fullWidth = false,
 }) {
-  const styles = `btn-hard ${fullWidth ? "w-full" : ""} ${className}`;
+  const base = `btn-shine ${fullWidth ? "w-full" : ""} ${className}`;
+
+  const inner = (
+    <>
+      <span>{children}</span>
+      <svg
+        className="btn-shine-icon"
+        viewBox="0 0 24 24"
+        fill="currentColor"
+        aria-hidden="true"
+      >
+        <path
+          fillRule="evenodd"
+          d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm4.28 10.28a.75.75 0 000-1.06l-3-3a.75.75 0 10-1.06 1.06l1.72 1.72H8.25a.75.75 0 000 1.5h5.69l-1.72 1.72a.75.75 0 101.06 1.06l3-3z"
+          clipRule="evenodd"
+        />
+      </svg>
+    </>
+  );
 
   if (to) {
     return (
-      <Link to={to} className={styles} onClick={onClick}>
-        <span>{children}</span>
-        <ArrowRight size={20} strokeWidth={2.5} />
+      <Link
+        to={to}
+        onClick={onClick}
+        className={base}
+        aria-disabled={disabled || undefined}
+      >
+        {inner}
       </Link>
     );
   }
 
   return (
-    <button
-      type={type}
-      onClick={onClick}
-      disabled={disabled}
-      className={styles}
-    >
-      <span>{children}</span>
-      <ArrowRight size={20} strokeWidth={2.5} />
+    <button type={type} onClick={onClick} disabled={disabled} className={base}>
+      {inner}
     </button>
   );
 }

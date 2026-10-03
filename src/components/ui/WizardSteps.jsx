@@ -81,11 +81,11 @@ export default function WizardSteps({
   onComplete,
   complete = false,
   isLoading = false,
-  height = 300,
+  height = 340,
   backLabel = "Retour",
   nextLabel = "Suivant",
-  finishLabel = "Terminer",
-  completeLabel = "Validé",
+  finishLabel = "Envoyer",
+  completeLabel = "Enregistré !",
   completeHint = "Redirection en cours...",
   className = "",
 }) {
@@ -145,10 +145,10 @@ export default function WizardSteps({
 
   return (
     <div className={`w-full ${className}`}>
-      {/* Labels des étapes */}
+      {/* 1. Labels des étapes (Texte BLANC) */}
       <span
         aria-hidden
-        className="mb-2 grid select-none text-[13px] font-black uppercase tracking-widest text-ink"
+        className="mb-2 grid select-none text-[13px] font-black uppercase tracking-widest text-white text-center"
       >
         {steps.map((s, i) => (
           <motion.span
@@ -163,7 +163,7 @@ export default function WizardSteps({
         ))}
       </span>
 
-      {/* Barre de progression Brutaliste */}
+      {/* 2. Barre de progression Dark Mode */}
       <ol ref={listRef} className="mb-6 flex list-none items-center gap-2 p-0">
         {steps.map((s, i) => {
           const done = complete || i < at;
@@ -171,12 +171,12 @@ export default function WizardSteps({
 
           const tile = (
             <motion.span
-              className={`grid size-8 place-items-center rounded-full border-3 border-ink text-[12px] font-black tabular-nums transition-colors duration-150 ${
+              className={`grid size-8 place-items-center rounded-full border text-[12px] font-black tabular-nums transition-colors duration-150 ${
                 done
-                  ? "bg-mint text-ink shadow-hard-sm"
+                  ? "bg-[#006bb3] border-[#006bb3] text-white shadow-md"
                   : here
-                    ? "bg-ink text-white shadow-hard-sm"
-                    : "bg-white text-ink/30"
+                    ? "bg-white border-white text-black shadow-lg shadow-white/20"
+                    : "bg-white/5 border-white/20 text-white/40"
               }`}
               initial={false}
               animate={{ scale: here ? 1 : 0.92 }}
@@ -212,17 +212,19 @@ export default function WizardSteps({
                     intent.current = "list";
                     goTo(i);
                   }}
-                  className="rounded-full outline-none focus-visible:ring-2 ring-ink"
+                  className="rounded-full outline-none focus-visible:ring-2 ring-white/50"
                 >
                   {tile}
                 </button>
               ) : (
                 <span>{tile}</span>
               )}
+
+              {/* Ligne de connexion entre les puces */}
               {i < total - 1 && (
-                <span className="relative h-[4px] flex-1 overflow-hidden rounded-full bg-cream border-y border-transparent">
+                <span className="relative h-[2px] flex-1 overflow-hidden rounded-full bg-white/10">
                   <motion.span
-                    className="absolute inset-0 origin-left bg-ink"
+                    className="absolute inset-0 origin-left bg-[#006bb3]"
                     initial={false}
                     animate={{ scaleX: complete || i < at ? 1 : 0 }}
                     transition={reduced ? { duration: 0 } : RAIL}
@@ -234,11 +236,11 @@ export default function WizardSteps({
         })}
       </ol>
 
-      {/* Panneau de contenu de l'étape */}
+      {/* 3. Panneau de contenu de l'étape (Verre fumé) */}
       <div
         ref={viewportRef}
         style={{ height }}
-        className="relative overflow-hidden rounded-2xl border-3 border-ink bg-white shadow-hard outline-none transition-all duration-300"
+        className="relative overflow-hidden rounded-2xl border border-white/20 bg-black/40 backdrop-blur-xl shadow-2xl outline-none transition-all duration-300"
       >
         <AnimatePresence initial={false} custom={direction}>
           <motion.div
@@ -249,14 +251,14 @@ export default function WizardSteps({
             animate="center"
             exit="exit"
             transition={panelTransition}
-            className="absolute inset-0 overflow-y-auto p-5"
+            className="absolute inset-0 overflow-y-auto p-5 sm:p-6 scrollbar-hide"
           >
             {complete ? (
               <div className="flex h-full flex-col items-center justify-center gap-2 text-center">
-                <p className="text-xl font-black uppercase text-ink">
+                <p className="text-xl font-black uppercase text-white">
                   {completeLabel}
                 </p>
-                <p className="text-sm font-medium text-ink/70">
+                <p className="text-sm font-medium text-white/70">
                   {completeHint}
                 </p>
               </div>
@@ -267,8 +269,8 @@ export default function WizardSteps({
         </AnimatePresence>
       </div>
 
-      {/* Boutons d'action en bas */}
-      <div className="mt-5 flex h-12 items-center gap-3">
+      {/* 4. Boutons d'action en bas */}
+      <div className="mt-6 flex items-center justify-between gap-3 h-[52px]">
         <AnimatePresence initial={false}>
           {!isFirst && !complete && (
             <motion.button
@@ -281,7 +283,7 @@ export default function WizardSteps({
                 intent.current = "panel";
                 back();
               }}
-              className="btn-hard !bg-white !text-ink !px-5 !py-0 h-full"
+              className="px-6 py-0 h-full rounded-full border border-white/20 bg-white/5 text-white font-bold text-[14px] hover:bg-white/10 transition-colors"
             >
               {backLabel}
             </motion.button>
@@ -298,12 +300,12 @@ export default function WizardSteps({
                 if (!isLast) intent.current = "panel";
                 next();
               }}
-              className="btn-hard !px-6 !py-0 h-full ml-auto min-w-[120px]"
+              className="btn-shine !py-0 h-full ml-auto min-w-[140px] flex items-center justify-center"
             >
               {isLoading ? (
-                <Loader2 size={18} className="animate-spin" />
+                <Loader2 size={20} className="animate-spin text-white" />
               ) : (
-                <span className="col-start-1 row-start-1">
+                <span className="flex items-center gap-2">
                   {isLast ? finishLabel : nextLabel}
                 </span>
               )}
