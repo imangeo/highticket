@@ -10,7 +10,6 @@ function App() {
     <Router>
       <GlobalPrism speed={1} />
       <div className="min-h-screen flex flex-col font-sans text-ink relative z-10 bg-transparent">
-        <Header />
         <div className="flex-grow bg-transparent">
           <Routes>
             <Route path="/" element={<Home />} />

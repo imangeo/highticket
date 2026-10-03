@@ -132,7 +132,7 @@ export default function Home() {
       {/* ========== 1. HERO ========== */}
       <section className="px-4 pt-16 pb-16 relative">
         <div className="max-w-5xl mx-auto text-center">
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-black leading-tight tracking-tight mb-8 min-h-[3em] sm:min-h-[2em] flex items-center justify-center text-white">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight tracking-tight mb-8 min-h-[3em] sm:min-h-[2em] flex items-center justify-center text-white">
             <TypeWriter
               text="Avant de fermer cette page, donne-moi quelques minutes."
               speed={38}
@@ -195,7 +195,7 @@ export default function Home() {
                 key={`s1-${idx}`}
                 className="w-[320px] sm:w-[450px] py-8 px-6 text-center border-r border-white/10 shrink-0 flex flex-col justify-center"
               >
-                <p className="text-3xl sm:text-4xl font-black tracking-tight text-white mb-2">
+                <p className="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-2">
                   {s.value}
                 </p>
                 <p className="text-xs font-bold uppercase tracking-widest text-white/60 leading-relaxed">
@@ -210,7 +210,7 @@ export default function Home() {
                 key={`s2-${idx}`}
                 className="w-[320px] sm:w-[450px] py-8 px-6 text-center border-r border-white/10 shrink-0 flex flex-col justify-center"
               >
-                <p className="text-3xl sm:text-4xl font-black tracking-tight text-white mb-2">
+                <p className="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-2">
                   {s.value}
                 </p>
                 <p className="text-xs font-bold uppercase tracking-widest text-white/60 leading-relaxed">
@@ -234,7 +234,7 @@ export default function Home() {
           <div className="card-dark border-orange-500/40 shadow-[0_0_40px_rgba(249,115,22,0.1)] p-8 sm:p-12 space-y-6">
             <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between mb-8">
               <ShieldCheck size={40} className="text-orange-500 shrink-0" />
-              <h2 className="text-2xl sm:text-3xl font-black uppercase tracking-tight leading-tight text-orange-400 text-left sm:text-center">
+              <h2 className="text-2xl sm:text-3xl font-bold uppercase tracking-tight leading-tight text-orange-400 text-left sm:text-center">
                 MON ENGAGEMENT : TA PREMIÈRE COMMISSION EN 27 JOURS, SINON C'EST
                 À MOI DE RÉPARER
               </h2>
@@ -246,13 +246,10 @@ export default function Home() {
 
             <p className="font-medium text-white/80 leading-relaxed">
               Il y a une peur que je connais par cœur : celle de confier de
-              l'argent qu'on a mis du temps à réunir.
-            </p>
-            <p className="font-medium text-white/80 leading-relaxed">
-              Chez nous, cet argent ne tombe pas du ciel. Parfois c'est celui
-              d'une mère qui s'est privée. D'un grand frère qui a poussé pour
-              toi. De plusieurs mois de petits boulots, de trajets à pied pour
-              économiser le transport.
+              l'argent qu'on a mis du temps à réunir. Chez nous, cet argent ne
+              tombe pas du ciel. Parfois c'est celui d'une mère qui s'est
+              privée. D'un grand frère qui a poussé pour toi. De plusieurs mois
+              de petits boulots, de trajets à pied pour économiser le transport.
             </p>
             <p className="font-medium text-white/80 leading-relaxed text-red-400">
               Et l'idée de le perdre pour rien te serre la gorge.
@@ -272,17 +269,10 @@ export default function Home() {
               <div className="border-l-2 border-white/20 pl-4">
                 <h3 className="font-bold text-white mb-2">Ta part :</h3>
                 <ul className="space-y-2 text-white/80 text-sm">
-                  <li className="flex gap-2">
-                    <ArrowRight size={16} className="shrink-0 mt-0.5" /> Tu
-                    rejoins la HIGH–TICKET SETTING SCHOOL
-                  </li>
-                  <li className="flex gap-2">
-                    <ArrowRight size={16} className="shrink-0 mt-0.5" /> Tu suis
-                    les étapes pendant 27 jours
-                  </li>
-                  <li className="flex gap-2">
-                    <ArrowRight size={16} className="shrink-0 mt-0.5" /> Tu
-                    viens aux appels en direct, tu poses tes questions, tu
+                  <li>— Tu rejoins la HIGH–TICKET SETTING SCHOOL</li>
+                  <li>— Tu suis les étapes pendant 27 jours</li>
+                  <li>
+                    — Tu viens aux appels en direct, tu poses tes questions, tu
                     passes à l'action
                   </li>
                 </ul>
@@ -346,7 +336,7 @@ export default function Home() {
             </p>
             <p className="font-medium text-white/80 leading-relaxed text-sm">
               <span className="text-green-400 font-bold">
-                Si tu appliques, tu avances vers ta première commission.
+                Si tu appliques, tu advances vers ta première commission.
               </span>{" "}
               Si malgré ton travail ça ne marche pas, tu es remboursé et je
               reste avec toi. Dans les deux cas, tu n'es plus seul face à ton
@@ -371,7 +361,7 @@ export default function Home() {
           <div className="card-dark border-red-500/30 shadow-[0_0_30px_rgba(239,68,68,0.1)] p-8 sm:p-12">
             <div className="flex items-center gap-4 mb-8">
               <XCircle size={32} className="text-red-500 shrink-0" />
-              <h2 className="text-2xl sm:text-4xl font-black uppercase tracking-tight text-red-400">
+              <h2 className="text-2xl sm:text-4xl font-bold uppercase tracking-tight text-red-400">
                 Si tu restes immobile
               </h2>
             </div>
@@ -460,7 +450,7 @@ export default function Home() {
             <div className="flex items-center gap-4 mb-8">
               <CheckCircle2 size={32} className="text-green-500 shrink-0" />
               <div>
-                <h2 className="text-2xl sm:text-4xl font-black uppercase tracking-tight text-white">
+                <h2 className="text-2xl sm:text-4xl font-bold uppercase tracking-tight text-white">
                   Si tu passes à l'action
                 </h2>
                 <h3 className="text-lg font-bold text-green-400 mt-1">
@@ -554,28 +544,24 @@ export default function Home() {
           </div>
         </div>
       </section>
-      {/* ========== 6. OFFRES DU JOUR (Grand Cadre + Format Vidéo Entier) ========== */}
-      <section className="px-4 py-16">
+
+      {/* ========== 6. OFFRES DU JOUR ========== */}
+      <section className="px-4 py-16 bg-[#050505]/40 border-y border-white/10">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl sm:text-5xl font-black uppercase tracking-tight leading-tight mb-6 text-white">
+          <h2 className="text-3xl sm:text-5xl font-bold uppercase tracking-tight leading-tight mb-6 text-white">
             JE T’ENVOIE DES OFFRES CHAQUE JOUR
           </h2>
-
-          <p className="font-medium text-white/80 text-base sm:text-lg max-w-2xl mx-auto mb-10 leading-relaxed">
+          <p className="font-medium text-white/80 text-lg max-w-2xl mx-auto mb-4">
             Tu n’auras pas besoin de chercher les opportunités seul. Chaque
             jour, je t’envoie des offres d’entrepreneurs à la recherche de
             setters.
-            <br />
-            <br />
+          </p>
+          <p className="font-medium text-white/80 text-lg max-w-2xl mx-auto mb-10">
             Ton seul travail sera alors de postuler aux offres qui
             t’intéressent.
-            <br />
-            <br />
-            <strong className="text-white text-xl">VOICI UN APERÇU :</strong>
           </p>
-
-          {/* GRAND CADRE LARGE QUI CONTIENT LA VIDÉO SANS LA COUPER */}
-          <div className="card-dark p-4 sm:p-8 max-w-3xl mx-auto">
+          <p className="font-bold text-white text-lg mb-4">VOICI UN APERÇU :</p>
+          <div className="max-w-3xl mx-auto">
             <SmartVideoPlayer
               src={CONTENT.videos.dailyOffer.src}
               type={CONTENT.videos.dailyOffer.type}
@@ -589,7 +575,7 @@ export default function Home() {
       <section className="py-16 overflow-hidden">
         <div className="w-full">
           <div className="text-center mb-10 px-4">
-            <h2 className="text-3xl sm:text-5xl font-black uppercase tracking-tight text-white">
+            <h2 className="text-3xl sm:text-5xl font-bold uppercase tracking-tight text-white">
               Ce que tu reçois
             </h2>
           </div>
@@ -604,7 +590,7 @@ export default function Home() {
                   className="card-dark min-w-[280px] sm:min-w-[320px] max-w-[320px] p-6 snap-center flex-shrink-0 flex flex-col justify-between"
                 >
                   <div>
-                    <div className="w-10 h-10 border border-white/20 rounded-full flex items-center justify-center font-black text-white mb-6">
+                    <div className="w-10 h-10 border border-white/20 rounded-full flex items-center justify-center font-bold text-white mb-6">
                       {i + 1}
                     </div>
                     <h3 className="font-bold text-lg leading-tight mb-3 text-white">
@@ -639,7 +625,7 @@ export default function Home() {
       <section className="px-4 py-20 bg-[#050505]/40 border-y border-white/10">
         <div className="max-w-[1400px] mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-4xl sm:text-6xl font-black uppercase tracking-tight mb-4 text-white">
+            <h2 className="text-4xl sm:text-6xl font-bold uppercase tracking-tight mb-4 text-white">
               Témoignages
             </h2>
             <p className="text-lg font-bold text-white/60">
@@ -697,7 +683,7 @@ export default function Home() {
       {/* ========== 9. DEUX CHEMINS ========== */}
       <section className="px-4 py-20">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl sm:text-5xl font-black uppercase tracking-tight mb-4 text-center text-white">
+          <h2 className="text-3xl sm:text-5xl font-bold uppercase tracking-tight mb-4 text-center text-white">
             Deux chemins devant toi
           </h2>
           <p className="font-medium text-white/70 text-center mb-10 text-lg">
@@ -748,7 +734,7 @@ export default function Home() {
       <section className="px-4 py-16 border-t border-white/10 bg-[#050505]/40">
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-10">
-            <h2 className="text-3xl sm:text-4xl font-black uppercase tracking-tight text-white">
+            <h2 className="text-3xl sm:text-4xl font-bold uppercase tracking-tight text-white">
               Les questions que tu te poses
             </h2>
           </div>
@@ -769,7 +755,7 @@ export default function Home() {
       {/* ========== 11. CTA FINAL ========== */}
       <section className="px-4 py-24 text-center border-t border-white/10">
         <div className="max-w-3xl mx-auto space-y-8">
-          <h2 className="text-3xl sm:text-5xl font-black tracking-tight leading-tight text-white">
+          <h2 className="text-3xl sm:text-5xl font-bold tracking-tight leading-tight text-white">
             Dans 3 à 4 mois, tu seras soit quelqu'un qui a essayé, soit
             quelqu'un qui se demande ce qui serait arrivé.
           </h2>

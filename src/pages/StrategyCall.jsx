@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { SITE_CONFIG } from "../config/site.config";
-import { CONTENT } from "../config/content";
 import { sendLeadToGoogle } from "../services/googleApi";
 import CountryPicker, { ALL_COUNTRIES } from "../components/ui/CountryPicker";
 import {
@@ -16,6 +15,8 @@ import { AlertTriangle, CheckCircle2 } from "lucide-react";
 import { fireConfetti } from "../utils/confetti";
 import WizardSteps from "../components/ui/WizardSteps";
 import SmartVideoPlayer from "../components/ui/SmartVideoPlayer";
+import { CONTENT } from "../config/content";
+import Button from "../components/ui/Button";
 
 export default function StrategyCall() {
   const [index, setIndex] = useState(0);
@@ -97,9 +98,9 @@ export default function StrategyCall() {
     }
   };
 
-  // Styles très clairs pour les inputs sur fond sombre
+  // Styles pour les inputs Dark Mode (font-bold pour l'élégance)
   const inputClass =
-    "w-full bg-black/40 border border-white/30 rounded-xl px-4 py-3 font-medium text-white placeholder:text-white/40 outline-none focus:border-white/80 transition-colors shadow-inner";
+    "w-full bg-black/40 border border-white/30 rounded-xl px-4 py-3 font-bold text-white placeholder:text-white/40 outline-none focus:border-white/80 transition-colors shadow-inner";
 
   const stepsData = [
     {
@@ -195,7 +196,7 @@ export default function StrategyCall() {
   return (
     <main className="w-full min-h-[80vh] bg-transparent text-white px-4 py-16 relative">
       <div className="max-w-md mx-auto text-center relative z-10">
-        {/* Titre Principal */}
+        {/* Titre Principal : font-black pour l'impact */}
         <h1 className="text-4xl sm:text-5xl font-black uppercase tracking-tight leading-tight mb-8 text-white drop-shadow-lg">
           {status === "success" ? "C'est enregistré !" : "Prêt à commencer"}
         </h1>
@@ -203,11 +204,11 @@ export default function StrategyCall() {
         {/* Phrase + Vidéo Explicative */}
         {status !== "success" && (
           <div className="mb-10 max-w-2xl mx-auto animate-[toastIn_0.3s_ease-out]">
-            <p className="text-xl sm:text-2xl font-black uppercase tracking-tight text-white mb-6 drop-shadow-md">
+            {/* Texte "Bravo" avec font-bold (700) pour l'élégance */}
+            <p className="text-xl sm:text-2xl font-bold uppercase tracking-tight text-white mb-6 drop-shadow-md">
               Bravo de passer à l'action !
             </p>
 
-            {/* Lecteur Vidéo (S'il n'y a pas de lien dans content.js, ça affiche le placeholder normal) */}
             <div className="card-dark overflow-hidden border border-white/15 shadow-xl mx-auto">
               <SmartVideoPlayer
                 src={CONTENT.videos.strategy?.src || ""}
@@ -245,6 +246,7 @@ export default function StrategyCall() {
                 </span>
                 , j'ai bien reçu tes informations.
               </p>
+
               <p className="font-bold text-lg sm:text-xl text-white uppercase tracking-tight bg-white/5 border border-white/10 p-4 rounded-xl leading-snug">
                 Je vous contacte dès que possible.
               </p>
@@ -257,6 +259,13 @@ export default function StrategyCall() {
               <span className="font-bold uppercase tracking-wider text-sm sm:text-base text-blue-100">
                 Surveille ton WhatsApp
               </span>
+            </div>
+
+            {/* Bouton pour revenir à l'accueil (Optionnel, au cas où l'utilisateur veut revenir) */}
+            <div className="pt-4">
+              <Button to="/" className="px-8 !py-3">
+                Retourner à l'accueil
+              </Button>
             </div>
           </div>
         ) : (
@@ -279,7 +288,6 @@ export default function StrategyCall() {
           </div>
         )}
 
-        {/* Mention de bas de page */}
         {status !== "success" && (
           <p className="mt-8 text-[11px] font-medium uppercase tracking-widest text-white/50 bg-black/40 backdrop-blur-md inline-block px-4 py-2 rounded-full border border-white/10">
             Places limitées · Sans engagement
