@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { SITE_CONFIG } from "../config/site.config";
 import { sendLeadToGoogle } from "../services/googleApi";
 import CountryPicker, { ALL_COUNTRIES } from "../components/ui/CountryPicker";
 import {
@@ -31,13 +30,11 @@ export default function StrategyCall() {
     ALL_COUNTRIES.find((c) => c.code === "FR") || ALL_COUNTRIES[0],
   );
 
-  const [status, setStatus] = useState("idle"); // idle | loading | success | error
+  const [status, setStatus] = useState("idle");
   const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: "instant" });
-    const t = setTimeout(() => fireConfetti(), 350);
-    return () => clearTimeout(t);
   }, []);
 
   useEffect(() => {
@@ -92,24 +89,26 @@ export default function StrategyCall() {
     if (result.success) {
       setStatus("success");
       setDone(true);
+      setTimeout(() => fireConfetti(), 100);
+      window.scrollTo({ top: 0, behavior: "smooth" });
     } else {
       setStatus("error");
       setErrorMessage(result.message || "Erreur d'envoi. Réessaie.");
     }
   };
 
-  // Styles pour les inputs Dark Mode (font-bold pour l'élégance)
+  // Classe unique, plus claire (fond gris très sombre au lieu de noir pur) pour les inputs
   const inputClass =
-    "w-full bg-black/40 border border-white/30 rounded-xl px-4 py-3 font-bold text-white placeholder:text-white/40 outline-none focus:border-white/80 transition-colors shadow-inner";
+    "w-full bg-[#1a1a1a] border border-white/20 rounded-xl px-4 py-3.5 font-bold text-white placeholder:text-white/30 outline-none focus:border-white/60 transition-colors shadow-inner";
 
   const stepsData = [
     {
       id: "identity",
       label: "Identité",
       content: (
-        <div className="space-y-4 pt-1">
+        <div className="space-y-5 pt-2">
           <div className="flex flex-col gap-2 text-left">
-            <label className="text-xs font-bold uppercase tracking-widest text-white/80">
+            <label className="text-xs font-bold uppercase tracking-widest text-white/70">
               Prénom & Nom <span className="text-[#ff3366]">*</span>
             </label>
             <input
@@ -121,7 +120,7 @@ export default function StrategyCall() {
             />
           </div>
           <div className="flex flex-col gap-2 text-left">
-            <label className="text-xs font-bold uppercase tracking-widest text-white/80">
+            <label className="text-xs font-bold uppercase tracking-widest text-white/70">
               Âge <span className="text-[#ff3366]">*</span>
             </label>
             <input
@@ -142,7 +141,7 @@ export default function StrategyCall() {
       content: (
         <div className="space-y-4 pt-1 h-full flex flex-col justify-center">
           <div className="flex flex-col gap-2 text-left">
-            <label className="text-xs font-bold uppercase tracking-widest text-white/80">
+            <label className="text-xs font-bold uppercase tracking-widest text-white/70">
               Adresse email <span className="text-[#ff3366]">*</span>
             </label>
             <input
@@ -152,7 +151,7 @@ export default function StrategyCall() {
               placeholder="ton@email.com"
               className={inputClass}
             />
-            <p className="text-[11px] font-medium text-white/60 mt-1">
+            <p className="text-[11px] font-medium text-white/50 mt-1">
               Pour te recontacter et t’envoyer les infos.
             </p>
           </div>
@@ -163,19 +162,19 @@ export default function StrategyCall() {
       id: "whatsapp",
       label: "WhatsApp",
       content: (
-        <div className="space-y-4 pt-1">
+        <div className="space-y-5 pt-2">
           <div className="flex flex-col gap-2 text-left">
-            <label className="text-xs font-bold uppercase tracking-widest text-white/80">
+            <label className="text-xs font-bold uppercase tracking-widest text-white/70">
               Pays <span className="text-[#ff3366]">*</span>
             </label>
             <CountryPicker selected={country} onSelect={setCountry} />
           </div>
           <div className="flex flex-col gap-2 text-left">
-            <label className="text-xs font-bold uppercase tracking-widest text-white/80">
+            <label className="text-xs font-bold uppercase tracking-widest text-white/70">
               Numéro WhatsApp <span className="text-[#ff3366]">*</span>
             </label>
             <div className="flex gap-2">
-              <div className="flex items-center px-4 py-3 bg-white/10 text-white font-bold rounded-xl border border-white/30 text-sm shrink-0">
+              <div className="flex items-center px-4 py-3.5 bg-white/10 text-white font-bold rounded-xl border border-white/20 text-sm shrink-0">
                 {country.dial}
               </div>
               <input
@@ -194,83 +193,27 @@ export default function StrategyCall() {
   ];
 
   return (
-    <main className="w-full min-h-[80vh] bg-transparent text-white px-4 py-16 relative">
-      <div className="max-w-md mx-auto text-center relative z-10">
-        {/* Titre Principal : font-black pour l'impact */}
-        <h1 className="text-4xl sm:text-5xl font-black uppercase tracking-tight leading-tight mb-8 text-white drop-shadow-lg">
-          {status === "success" ? "C'est enregistré !" : "Prêt à commencer"}
-        </h1>
-
-        {/* Phrase + Vidéo Explicative */}
-        {status !== "success" && (
-          <div className="mb-10 max-w-2xl mx-auto animate-[toastIn_0.3s_ease-out]">
-            {/* Texte "Bravo" avec font-bold (700) pour l'élégance */}
-            <p className="text-xl sm:text-2xl font-bold uppercase tracking-tight text-white mb-6 drop-shadow-md">
-              Bravo de passer à l'action !
-            </p>
-
-            <div className="card-dark overflow-hidden border border-white/15 shadow-xl mx-auto">
-              <SmartVideoPlayer
-                src={CONTENT.videos.strategy?.src || ""}
-                type={CONTENT.videos.strategy?.type || "file"}
-                title={CONTENT.videos.strategy?.title || "Vidéo explicative"}
-              />
-            </div>
-          </div>
-        )}
-
-        {/* Erreurs de formulaire */}
-        {errorMessage && (
-          <div className="bg-red-500/20 border border-red-500/50 text-white rounded-xl p-3 mb-6 flex items-center gap-2 text-sm font-medium text-left shadow-lg">
-            <AlertTriangle size={18} className="shrink-0 text-red-400" />
-            <span>{errorMessage}</span>
-          </div>
-        )}
-
-        {/* ===== ÉCRAN SUCCÈS ===== */}
-        {status === "success" ? (
-          <div className="card-dark p-8 sm:p-10 text-center space-y-6 animate-[toastIn_0.35s_ease-out]">
-            <div className="w-16 h-16 mx-auto rounded-full bg-green-500/20 border border-green-500/50 flex items-center justify-center">
-              <CheckCircle2
-                size={36}
-                strokeWidth={2.5}
-                className="text-green-400"
-              />
-            </div>
-
-            <div className="space-y-3">
-              <p className="font-medium text-base sm:text-lg text-white/90 leading-relaxed">
-                Merci{" "}
-                <span className="font-bold text-white">
-                  {name.split(" ")[0] || ""}
-                </span>
-                , j'ai bien reçu tes informations.
-              </p>
-
-              <p className="font-bold text-lg sm:text-xl text-white uppercase tracking-tight bg-white/5 border border-white/10 p-4 rounded-xl leading-snug">
-                Je vous contacte dès que possible.
-              </p>
-            </div>
-
-            <div className="bg-blue-500/20 border border-blue-500/40 rounded-xl p-4 flex items-center justify-center gap-3">
-              <div className="w-8 h-8 rounded-full bg-blue-500 text-white font-bold text-sm flex items-center justify-center shrink-0">
-                i
+    <main className="w-full min-h-[85vh] bg-transparent text-white px-4 py-16 relative">
+      <div className="max-w-3xl mx-auto text-center relative z-10">
+        {status !== "success" ? (
+          <div className="max-w-md mx-auto animate-[toastIn_0.35s_ease-out]">
+            <div className="inline-block mb-4">
+              <div className="label-hard bg-white text-black border-2 border-black shadow-md">
+                Étape finale
               </div>
-              <span className="font-bold uppercase tracking-wider text-sm sm:text-base text-blue-100">
-                Surveille ton WhatsApp
-              </span>
             </div>
 
-            {/* Bouton pour revenir à l'accueil (Optionnel, au cas où l'utilisateur veut revenir) */}
-            <div className="pt-4">
-              <Button to="/" className="px-8 !py-3">
-                Retourner à l'accueil
-              </Button>
-            </div>
-          </div>
-        ) : (
-          /* ===== FORMULAIRE STEPPER ===== */
-          <div className="text-white">
+            <h1 className="text-4xl sm:text-5xl font-black uppercase tracking-tight leading-tight mb-8 text-white drop-shadow-lg">
+              Prêt à commencer
+            </h1>
+
+            {errorMessage && (
+              <div className="bg-red-500/20 border border-red-500/50 text-white rounded-xl p-3 mb-6 flex items-center gap-2 text-sm font-medium text-left shadow-lg">
+                <AlertTriangle size={18} className="shrink-0 text-red-400" />
+                <span>{errorMessage}</span>
+              </div>
+            )}
+
             <WizardSteps
               steps={stepsData}
               index={index}
@@ -283,15 +226,65 @@ export default function StrategyCall() {
               backLabel="Retour"
               finishLabel="Envoyer"
               completeLabel="Enregistré !"
-              completeHint="Je vous contacte dès que possible."
+              completeHint="Génération de ton accès..."
             />
-          </div>
-        )}
 
-        {status !== "success" && (
-          <p className="mt-8 text-[11px] font-medium uppercase tracking-widest text-white/50 bg-black/40 backdrop-blur-md inline-block px-4 py-2 rounded-full border border-white/10">
-            Places limitées · Sans engagement
-          </p>
+            <p className="mt-8 text-[11px] font-medium uppercase tracking-widest text-white/50 bg-black/40 backdrop-blur-md inline-block px-4 py-2 rounded-full border border-white/10">
+              Places limitées · Sans engagement
+            </p>
+          </div>
+        ) : (
+          <div className="animate-[toastIn_0.5s_ease-out] w-full max-w-2xl mx-auto">
+            <h1 className="text-4xl sm:text-5xl font-black uppercase tracking-tight leading-tight mb-2 text-white drop-shadow-lg">
+              C'est enregistré !
+            </h1>
+
+            <p className="text-xl sm:text-2xl font-bold uppercase tracking-tight text-[#006bb3] mb-8 drop-shadow-md">
+              Bravo de passer à l'action !
+            </p>
+
+            <div className="card-dark overflow-hidden border border-white/20 shadow-2xl mx-auto mb-10 bg-black/50">
+              <SmartVideoPlayer
+                src={CONTENT.videos.strategy?.src || ""}
+                type={CONTENT.videos.strategy?.type || "file"}
+                title={CONTENT.videos.strategy?.title || "Vidéo explicative"}
+                priority={true}
+              />
+            </div>
+
+            <div className="card-dark p-6 sm:p-10 text-center space-y-6 max-w-lg mx-auto">
+              <div className="w-16 h-16 mx-auto rounded-full bg-green-500/20 border border-green-500/50 flex items-center justify-center">
+                <CheckCircle2
+                  size={36}
+                  strokeWidth={2.5}
+                  className="text-green-400"
+                />
+              </div>
+
+              <div className="space-y-3">
+                <p className="font-medium text-base sm:text-lg text-white/90 leading-relaxed">
+                  Merci{" "}
+                  <span className="font-bold text-white">
+                    {name.split(" ")[0] || ""}
+                  </span>
+                  , j'ai bien reçu tes informations.
+                </p>
+                <p className="font-bold text-lg sm:text-xl text-white uppercase tracking-tight bg-white/5 border border-white/10 p-4 rounded-xl leading-snug">
+                  Je vous contacte dès que possible.
+                </p>
+              </div>
+
+              <div className="bg-[#006bb3]/20 border border-[#006bb3]/40 rounded-xl p-4 inline-block mx-auto mt-2">
+                <span className="font-bold uppercase tracking-wider text-sm sm:text-base text-blue-100">
+                  Surveille ton WhatsApp
+                </span>
+              </div>
+            </div>
+
+            <div className="mt-10">
+              <Button to="/">Retourner à l'accueil</Button>
+            </div>
+          </div>
         )}
       </div>
     </main>
