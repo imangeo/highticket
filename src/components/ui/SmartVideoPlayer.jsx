@@ -21,11 +21,11 @@ export default function SmartVideoPlayer({
   const isSrcInvalid = !src || src.trim() === "";
 
   // ASTUCE MOBILE :
-  // 1) On ajoute #t=0.001 pour forcer iOS Safari & Android Chrome à afficher la 1ère image au scroll
+  // 1) Ajoute #t=0.001 pour forcer l'affichage de la 1ère frame sur iOS/Android
   const videoSrcWithTime =
     src && type === "file" && !src.includes("#t=") ? `${src}#t=0.001` : src;
 
-  // 2) Génération automatique d'une image miniature (.jpg) si la vidéo provient de Cloudinary
+  // 2) Poster Auto Cloudinary (.jpg) pour affichage instantané sans charger la vidéo
   const autoCloudinaryPoster = src?.includes("cloudinary.com")
     ? src.replace(/\.(mp4|mov|webm)(\?.*)?$/i, ".jpg")
     : undefined;
@@ -43,7 +43,6 @@ export default function SmartVideoPlayer({
     }
   }, [src, type, storageKey, isSrcInvalid]);
 
-  // Met en pause les AUTRES vidéos quand celle-ci joue
   useEffect(() => {
     const handleOtherVideoPlay = (event) => {
       if (event.detail?.id !== uniqueId.current) {
@@ -57,7 +56,6 @@ export default function SmartVideoPlayer({
       window.removeEventListener(VIDEO_PLAY_EVENT, handleOtherVideoPlay);
   }, []);
 
-  // Pause automatique au scroll
   useEffect(() => {
     if (type !== "file" || !videoRef.current || isSrcInvalid) return;
     const observer = new IntersectionObserver(
@@ -123,7 +121,7 @@ export default function SmartVideoPlayer({
 
   if (isSrcInvalid || hasError) {
     return (
-      <div className="card-dark aspect-[9/16] max-h-[480px] flex flex-col items-center justify-center p-4 text-center bg-black/80 w-full">
+      <div className="card-dark min-h-[220px] flex flex-col items-center justify-center p-4 text-center bg-black/80 w-full">
         <VideoOff size={28} className="text-white/30 mb-2" />
         <p className="font-bold text-xs text-white/40 uppercase tracking-widest">
           {title}
@@ -135,9 +133,10 @@ export default function SmartVideoPlayer({
   return (
     <div
       ref={containerRef}
-      className="relative card-dark overflow-hidden w-full bg-black flex items-center justify-center aspect-[9/16] max-h-[70vh]"
+      // On retire aspect-[9/16], la div s'adapte à la vidéo
+      className="relative card-dark overflow-hidden w-full bg-black flex items-center justify-center"
     >
-      {/* SPINNER UNIQUE DE CHARGEMENT */}
+      {/* SPINNER UNIQUE SANS TEXTE */}
       {isLoading && (
         <div className="absolute inset-0 bg-black/60 backdrop-blur-[2px] flex items-center justify-center z-20 pointer-events-none">
           <Loader2
@@ -173,12 +172,16 @@ export default function SmartVideoPlayer({
         </div>
       )}
 
-      {/* BALISE VIDÉO OPTIMISÉE MOBILE */}
+      {/* 
+        BALISE VIDÉO : 
+        - object-contain : AUCUN ZOOM, affiche 100% de l'image.
+        - max-h-[75vh] / max-h-[80vh] limite juste la hauteur pour ne pas dépasser l'écran.
+      */}
       <video
         ref={videoRef}
         src={videoSrcWithTime}
         poster={autoCloudinaryPoster}
-        className="w-full h-full object-cover bg-black block"
+        className="w-full h-auto max-h-[80vh] object-contain bg-black block mx-auto rounded-xl"
         controls
         playsInline
         preload="metadata"
