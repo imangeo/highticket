@@ -4,13 +4,17 @@ import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import StrategyCall from "./pages/StrategyCall";
 import GlobalPrism from "./components/ui/GlobalPrism";
-import GlobalToast from "./components/ui/GlobalToast"; // <-- IMPORT
+import GlobalToast from "./components/ui/GlobalToast";
 
 function App() {
   return (
     <Router>
+      {/* Fond animé 3D global */}
       <GlobalPrism speed={1} />
-      <GlobalToast /> {/* <-- BRANCHÉ ICI */}
+
+      {/* Notification Toast globale */}
+      <GlobalToast />
+
       <div className="min-h-screen flex flex-col font-sans text-white relative z-10 bg-transparent">
         <Header />
         <div className="flex-grow bg-transparent">
