@@ -1,28 +1,29 @@
 import { Link } from "react-router-dom";
-import { SITE_CONFIG } from "../config/site.config";
 import Button from "./ui/Button";
 
 export default function Header() {
-  // Fonction pour remonter en haut de la page au clic
   const handleLogoClick = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-cream/70 backdrop-blur-md border-b-3 border-ink py-3 px-4 sm:px-6">
-      <div className="max-w-5xl mx-auto flex items-center justify-between gap-3">
+    <header className="sticky top-0 z-50 w-full bg-black/80 backdrop-blur-xl border-b border-white/10 py-3 px-3 sm:px-6">
+      <div className="max-w-5xl mx-auto flex items-center justify-between gap-2 sm:gap-4">
+        {/* Logo / Nom de l'école */}
         <Link
           to="/"
           onClick={handleLogoClick}
-          className="font-black text-sm sm:text-lg uppercase tracking-tight hover:opacity-70 transition-opacity"
+          className="font-bold text-xs xs:text-sm sm:text-base md:text-lg uppercase tracking-tight text-white hover:opacity-80 transition-opacity truncate"
         >
-          {SITE_CONFIG.schoolName}
+          H-T SETTING SCHOOL
         </Link>
+
+        {/* Bouton d'action responsive */}
         <Button
           to="/appel-strategique"
-          className="!px-5 !py-2.5 !text-sm !shadow-none"
+          className="!px-3.5 !py-2 sm:!px-5 sm:!py-2.5 !text-xs sm:!text-sm shrink-0 whitespace-nowrap"
         >
-          Réserver
+          Je réserve mon appel
         </Button>
       </div>
     </header>

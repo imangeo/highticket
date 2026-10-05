@@ -460,10 +460,8 @@ export default function Home() {
               <strong className="text-[#006bb3] ">
                 Et tu n’as pas besoin d’attendre de décrocher ton premier
                 contrat pour commencer à gagner de l’argent : grâce aux stages
-                d’expérimentation de l’académie, tu peux générer entre{" "}
-                
-                  100 et 200 $ par semaine
-                .
+                d’expérimentation de l’académie, tu peux générer entre 100 et
+                200 $ par semaine .
               </strong>
 
               <p>
@@ -540,7 +538,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="flex flex-nowrap gap-4 overflow-x-auto pb-6 px-1 snap-x snap-mandatory scrollbar-hide mb-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-6 mb-12 max-w-6xl mx-auto">
             {CONTENT.proofs
               .filter(
                 (p) => p.type === "video-file" || p.type === "video-youtube",
@@ -548,7 +546,7 @@ export default function Home() {
               .map((item) => (
                 <div
                   key={item.id}
-                  className="card-dark overflow-hidden snap-start shrink-0 w-[280px] sm:w-[320px] p-0"
+                  className="card-dark overflow-hidden w-full max-w-[320px] mx-auto p-0"
                 >
                   <SmartVideoPlayer
                     src={item.src}
