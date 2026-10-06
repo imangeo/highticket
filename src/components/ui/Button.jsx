@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 export default function Button({
   children,
@@ -9,7 +9,29 @@ export default function Button({
   className = "",
   fullWidth = false,
 }) {
+  const location = useLocation();
   const base = `btn-shine ${fullWidth ? "w-full" : ""} ${className}`;
+
+  const handleClick = (e) => {
+    if (disabled) {
+      e.preventDefault();
+      return;
+    }
+
+    // Si on est DÉJÀ sur la page /appel-strategique :
+    if (to && location.pathname === to) {
+      e.preventDefault();
+      // On déclenche le Toast Global
+      window.dispatchEvent(
+        new CustomEvent("show-info-toast", {
+          detail: { message: "Tu es déjà sur la page de réservation !" },
+        }),
+      );
+      return;
+    }
+
+    if (onClick) onClick(e);
+  };
 
   const inner = (
     <>
@@ -33,7 +55,7 @@ export default function Button({
     return (
       <Link
         to={to}
-        onClick={onClick}
+        onClick={handleClick}
         className={base}
         aria-disabled={disabled || undefined}
       >
@@ -43,7 +65,12 @@ export default function Button({
   }
 
   return (
-    <button type={type} onClick={onClick} disabled={disabled} className={base}>
+    <button
+      type={type}
+      onClick={handleClick}
+      disabled={disabled}
+      className={base}
+    >
       {inner}
     </button>
   );

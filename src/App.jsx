@@ -3,19 +3,19 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import StrategyCall from "./pages/StrategyCall";
-// N'oublie pas d'importer ton fond (GlobalShader, GlobalGridScan ou GlobalPrism)
 import GlobalPrism from "./components/ui/GlobalPrism";
-import GlobalToast from "./components/ui/GlobalToast"; // <-- L'import du Toast
+import GlobalToast from "./components/ui/GlobalToast";
 
 function App() {
   return (
     <Router>
+      {/* Fond animé 3D global */}
       <GlobalPrism speed={1} />
 
-      {/* On place le Toast Global ici pour qu'il écoute sur tout le site */}
+      {/* Notification Toast globale */}
       <GlobalToast />
 
-      <div className="min-h-screen flex flex-col font-sans text-ink relative z-10 bg-transparent">
+      <div className="min-h-screen flex flex-col font-sans text-white relative z-10 bg-transparent">
         <Header />
         <div className="flex-grow bg-transparent">
           <Routes>

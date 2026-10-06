@@ -1,9 +1,14 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Button from "./ui/Button";
 
 export default function Header() {
-  const handleLogoClick = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+  const location = useLocation();
+
+  const handleLogoClick = (e) => {
+    if (location.pathname === "/") {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
   };
 
   return (
@@ -18,7 +23,7 @@ export default function Header() {
           H-T SETTING SCHOOL
         </Link>
 
-        {/* Bouton d'action responsive */}
+        {/* Bouton connecté à la logique Toast */}
         <Button
           to="/appel-strategique"
           className="!px-3.5 !py-2 sm:!px-5 sm:!py-2.5 !text-xs sm:!text-sm shrink-0 whitespace-nowrap"
