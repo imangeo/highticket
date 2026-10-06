@@ -35,12 +35,7 @@ export const CONTENT = {
       src: "https://res.cloudinary.com/dnn2ptbgd/video/upload/v1791054729/v1_oiugms.mp4",
       title: "Témoignage 1"
     },
-    {
-      id: "v5",
-      type: "video-file",
-      src: "https://res.cloudinary.com/dnn2ptbgd/video/upload/v1791054770/v2_qiqbaz.mp4",
-      title: "Témoignage 5"
-    },
+    
     {
       id: "v2",
       type: "video-file",
@@ -52,6 +47,12 @@ export const CONTENT = {
       type: "video-file",
       src: "https://res.cloudinary.com/dnn2ptbgd/video/upload/v1791054739/v5_stru8d.mp4",
       title: "Témoignage 3"
+    },
+    {
+      id: "v5",
+      type: "video-file",
+      src: "https://res.cloudinary.com/dnn2ptbgd/video/upload/v1791054770/v2_qiqbaz.mp4",
+      title: "Témoignage 5"
     },
     {
       id: "v4",
