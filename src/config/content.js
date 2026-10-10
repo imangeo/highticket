@@ -62,6 +62,7 @@ export const CONTENT = {
     },
 
     // --- LES IMAGES PRIORITAIRES ---
+    { id: "r0", type: "image", src: "/r0.jpeg" },
     { id: "r22", type: "image", src: "/r22.png" },
     { id: "r20", type: "image", src: "/r20.png" },
 
